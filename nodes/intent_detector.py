@@ -34,6 +34,9 @@ Return JSON:
     "clarification_question": null
 }}
 
+> **Return ONLY valid JSON.  
+> Do not include explanations, markdown, or text outside JSON.**
+
 If needs_clarification = true, provide a short, clear question.
 """
 
@@ -60,8 +63,14 @@ def process(state: AgentState) -> AgentState:
     )
     
     try:
-        result = inference(user_prompt=detection_prompt)
-        result = json.loads(result)
+        raw = inference(user_prompt=detection_prompt)
+        import re
+        match = re.search(r'\{.*\}', raw, re.DOTALL)
+        if not match:
+            raise ValueError("No JSON found in model output")
+        json_str = match.group()      # ← THIS is the fix
+        result = json.loads(json_str)
+        # result = json.loads(match)
         
         state["detected_intent"] = result["intent"]
         state["intent_confidence"] = result["confidence"]

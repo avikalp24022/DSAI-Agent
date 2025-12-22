@@ -85,11 +85,11 @@ if __name__ == "__main__":
     # )
     
     # TEST CASE 3: Image + Code Explanation
-    # print("\n TEST 3: Image OCR + Code Explanation\n")
-    # run_test(
-    #     user_prompt="Explain this code",
-    #     input_data="code_screenshot.png"
-    # )
+    print("\n TEST 3: Image OCR + Code Explanation\n")
+    run_test(
+        user_prompt="Explain this code",
+        input_data="code_screenshot.png"
+    )
     
     # TEST CASE 4: Ambiguous Query (should ask follow-up)
     # print("\n❓ TEST 4: Ambiguous Query\n")
@@ -98,8 +98,8 @@ if __name__ == "__main__":
     #     input_data="document.pdf"
     # )
     # TEST CASE 5: Conversational (should ask follow-up)
-    print("\n❓ TEST 5: Ambiguous Query\n")
-    run_test(
-        user_prompt="Hey, whats up",
-        # input_data="document.pdf"
-    )
+    # print("\n❓ TEST 5: Ambiguous Query\n")
+    # run_test(
+    #     user_prompt="Hey, whats up",
+    #     # input_data="document.pdf"
+    # )

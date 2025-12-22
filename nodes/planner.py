@@ -29,11 +29,13 @@ Rules:
 6. For "code_explain" on image: ["ocr_image", "code_explanation"]
 
 Return JSON array: ["task1", "task2"]
+> **Return ONLY valid JSON.  
+> Do not include explanations, markdown, or text outside JSON.**
 """
 
 def process(state: AgentState) -> AgentState:
     """
-    Create execution plan based on intent
+    Create execution plan based on intent.
     """
     
     print("\n[PLANNER] Creating execution plan...")
@@ -48,8 +50,8 @@ def process(state: AgentState) -> AgentState:
     )
     
     try:
-        result = inference(planning_prompt, json_mode=True)
-        plan = json.loads(result)
+        plan = inference(user_prompt=planning_prompt, json_req=True)
+       
         
         # Ensure it's a list
         if isinstance(plan, dict) and "plan" in plan:

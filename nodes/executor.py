@@ -52,6 +52,11 @@ def process(state: AgentState) -> AgentState:
             if result.get("success"):
                 state["extracted_content"] = result["transcript"]
         
+        elif current_task == "code_explanation":
+            content = state.get("extracted_content", "")
+            query = state["user_prompt"]
+            result = tool_func(content)
+
         else:
             # Other tasks work on extracted content
             content = state.get("extracted_content", "")

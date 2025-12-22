@@ -30,13 +30,22 @@ from google import genai
 from google.genai import types
 
 client = genai.Client()
-def inference(system_prompt="""""", user_prompt=""""""):
+def inference(system_prompt="""""", user_prompt="""""", json_req=False):
     response = client.models.generate_content(
         model="gemini-2.5-flash",
         config=types.GenerateContentConfig(
             system_instruction=system_prompt),
         contents=user_prompt
     )
+
+    if json_req == True:
+        import re
+        match = re.search(r'\{.*\}', response.text, re.DOTALL)
+        if not match:
+            raise ValueError("No JSON found in model output")
+        json_str = match.group()
+        print(json_str)
+        return json_str
 
     print(response.text)
     return response.text

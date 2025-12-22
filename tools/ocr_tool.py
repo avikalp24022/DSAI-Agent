@@ -1,6 +1,10 @@
 import pytesseract
 from PIL import Image
 
+pytesseract.pytesseract.tesseract_cmd = (
+    r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+)
+
 def extract(image_path: str) -> dict:
     """
     Extract text from image using OCR
@@ -27,3 +31,7 @@ def extract(image_path: str) -> dict:
         "confidence": avg_confidence / 100,
         "method": "tesseract"
     }
+
+
+if __name__ == "__main__":
+    print(extract("code_screenshot.png"))
