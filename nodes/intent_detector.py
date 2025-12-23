@@ -18,7 +18,8 @@ Available intents:
 4. "code_explain" - User wants code explanation
 5. "conversational" - General question/conversation
 6. "youtube_transcript" - User wants YouTube transcript
-7. "ambiguous" - Intent is unclear
+7. "transcribe" - User wants to transcribe the audio
+8. "ambiguous" - Intent is unclear
 
 Rules:
 - If confidence < 0.7, mark as "ambiguous"

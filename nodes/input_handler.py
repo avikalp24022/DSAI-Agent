@@ -18,7 +18,7 @@ def detect_input_type(user_prompt: str, input_data: Optional[str]) -> str:
             return "image"
         elif ext == '.pdf':
             return "pdf"
-        elif ext in ['.mp3', '.wav', '.m4a']:
+        elif ext in ['.mp3', '.wav', '.m4a', '.mp4']:
             return "audio"
     
     # Check for YouTube URL
@@ -51,7 +51,7 @@ def extract_content(input_type: str, input_data: str) -> Dict[str, Any]:
         }
     
     elif input_type == "audio":
-        result = asr.transcribe(input_data)
+        result = asr.transcribe(input_data, "Transcribe this audio")
         return {
             "content": result["text"] or "",
             "metadata": {"duration": result["duration"]}

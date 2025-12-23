@@ -35,7 +35,8 @@ def process(state: AgentState) -> AgentState:
         # Determine input for the tool
         if current_task in ["transcribe_audio", "ocr_image", "parse_pdf"]:
             input_data = state.get("input_data")
-            result = tool_func(input_data)
+            query = state["user_prompt"]
+            result = tool_func(input_data, query)
             
             if "text" in result:
                 state["extracted_content"] = result["text"]
@@ -58,8 +59,9 @@ def process(state: AgentState) -> AgentState:
         else:
             content = state.get("extracted_content", "")
             query = state["user_prompt"]
-            result = tool_func(content, query)
+            result = tool_func(query)
         
+        print(result)
         state["step_results"][current_task] = result
         print(f"[EXECUTOR] Task completed: {current_task}")
     
